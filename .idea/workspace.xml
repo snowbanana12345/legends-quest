@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a48a1e69-5e18-4351-b7a1-6bfca761c2d7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/definitions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/map/map_editor/map_texture_editor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/game_data/maps/tutorial_island_forest" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/map_id_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/texture_id_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/map_texture_renderer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/map_texture_renderer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/world_map/legends_quest_map.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/world_map/legends_quest_map.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/map_editor/map_texture_editor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/map_editor/map_editor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/texture_id_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/texture_id_manager.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +49,7 @@
       <recent name="C:\Interview_coding_projects\pygame_legends_quest\src\map" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.map_test">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pygame_legends_quest" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -97,8 +94,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.map_test" />
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.map_test" />
       </list>
     </recent_temporary>
   </component>
