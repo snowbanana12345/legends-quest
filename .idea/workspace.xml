@@ -4,11 +4,11 @@
     <list default="true" id="a48a1e69-5e18-4351-b7a1-6bfca761c2d7" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/definitions.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/map/map_editor/map_texture_editor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/map_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/map_id_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/texture_id_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/map_texture_renderer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/map_texture_renderer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/world_map/legends_quest_map.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/world_map/legends_quest_map.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

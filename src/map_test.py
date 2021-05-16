@@ -27,10 +27,17 @@ grid_texture_id_map = {(0, 0): "forest_fresh_grass", (1, 0): "forest_short_grass
                        (0, 3): "forest_thick_grass", (1, 3): "forest_thick_grass", (2, 3): "forest_thick_grass",
                        (3, 3): "forest_fresh_grass"}
 
+grid_tile_type_map = {(0, 0): "INVALID", (1, 0): "INVALID", (2, 0): "INVALID",
+                       (3, 0): "INVALID", (0, 1): "INVALID", (1, 1): "VALID",
+                       (2, 1): "INVALID", (3, 1): "INVALID", (0, 2): "INVALID",
+                       (1, 2): "VALID", (2, 2): "VALID", (3, 2): "INVALID",
+                       (0, 3): "VALID", (1, 3): "VALID", (2, 3): "INVALID",
+                       (3, 3): "INVALID"}
+
 test_camera = MapTextureRenderer(screen_width, screen_height, camera_x_center, camera_y_center,
                                  world_grid_x_length, world_grid_y_length)
 test_camera.set_grid_texture_map(grid_texture_id_map)
-
+test_camera.set_tile_type_map(grid_tile_type_map)
 
 while running:
     keys = pygame.key.get_pressed()
