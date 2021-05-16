@@ -3,7 +3,7 @@ import pygame
 import definitions
 
 root = definitions.ROOTDIR
-class MapIdManager:
+class TextureIdManager:
     def __init__(self):
         self.id_texture_map = {}
         self.id_texture_map["forest_fresh_grass"] = pygame.image.load(os.path.join(root, "assets\\map_tiles\\forest", "fresh_grass.png"))

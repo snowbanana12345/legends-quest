@@ -4,11 +4,12 @@
     <list default="true" id="a48a1e69-5e18-4351-b7a1-6bfca761c2d7" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/definitions.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/map/map_editor/map_texture_editor.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/map/map_editor/map_texture_renderer.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/map_editor_mode.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map/map_id_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/map_id_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/map_editor/map_texture_renderer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/map_texture_renderer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/map_id_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/texture_id_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map/world_map/legends_quest_map.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/world_map/legends_quest_map.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +47,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../pygame_fortress_manager" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Interview_coding_projects\pygame_legends_quest\src\map" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">

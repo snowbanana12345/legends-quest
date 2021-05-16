@@ -1,5 +1,4 @@
-from legends_quest_texture_id_manager import TextureIdManager
-from legends_quest_map_renderer import MapRenderer
+from src.map.texture_id_manager import TextureIdManager
 
 
 class Map:
@@ -15,7 +14,6 @@ class Map:
 
         # helper models
         self.texture_id_manager = TextureIdManager()    # stores the textures used in the map
-        self.map_renderer = MapRenderer()    # convert game coordinates to screen coordinates
 
     def move_up(self):
         # Move player up 1 box, if the box is valid.
