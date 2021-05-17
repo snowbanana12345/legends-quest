@@ -1,6 +1,7 @@
 import pygame
 import os
-
+import sys
+sys.path.append("C:\\Users\\Dreamcore\\Documents\\GitHub\\legends-quest")
 from src.map.map_texture_renderer import MapTextureRenderer
 from src.map.legends_quest_player_renderer import PlayerTextureRenderer
 
@@ -42,10 +43,10 @@ test_camera.set_grid_texture_map(grid_texture_id_map)
 test_camera.set_tile_type_map(grid_tile_type_map)
 
 # For testing PlayerTextureRenderer
-north_images = [pygame.image.load(f".\\map\\images\\N{i}") for i in range(3)]
-east_images = [pygame.image.load(f".\\map\\images\\E{i}") for i in range(3)]
-west_images = [pygame.image.load(f".\\map\\images\\W{i}") for i in range(3)]
-south_images = [pygame.image.load(f".\\map\\images\\S{i}") for i in range(3)]
+north_images = [pygame.image.load(f".\\map\\images\\N{i}.png") for i in range(3)]
+east_images = [pygame.image.load(f".\\map\\images\\E{i}.png") for i in range(3)]
+west_images = [pygame.image.load(f".\\map\\images\\W{i}.png") for i in range(3)]
+south_images = [pygame.image.load(f".\\map\\images\\S{i}.png") for i in range(3)]
 test_player = PlayerTextureRenderer(100, 100, {"North": north_images,
                                                "East": east_images,
                                                "West": west_images,
@@ -71,7 +72,7 @@ while running:
         test_player.start_moving()
         test_player.face_east()
         camera_x_center += camera_velocity
-    if not keys[pygame.K_w]:
+    if all([not keys[pygame.K_w], not keys[pygame.K_s], not keys[pygame.K_a], not keys[pygame.K_d]]):
         test_player.stop_moving()
 
     for event in pygame.event.get():
