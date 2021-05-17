@@ -54,7 +54,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    screen.fill((0,0,0))
+    screen.fill((0, 0, 0))
     test_camera.set_center(camera_x_center, camera_y_center)
     test_camera.render(screen)
     clock.tick(frame_rate)
