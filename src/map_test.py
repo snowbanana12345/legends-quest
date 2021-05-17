@@ -42,12 +42,10 @@ test_camera.set_grid_texture_map(grid_texture_id_map)
 test_camera.set_tile_type_map(grid_tile_type_map)
 
 # For testing PlayerTextureRenderer
-image_files = os.listdir(".\\map\\images")
-print(image_files)
-north_images = [pygame.image.load(f".\\map\\images\\{img}") for img in image_files if "N" in img]
-east_images = [pygame.image.load(f".\\map\\images\\{img}") for img in image_files if "E" in img]
-west_images = [pygame.image.load(f".\\map\\images\\{img}") for img in image_files if "W" in img]
-south_images = [pygame.image.load(f".\\map\\images\\{img}") for img in image_files if "S" in img]
+north_images = [pygame.image.load(f".\\map\\images\\N{i}") for i in range(3)]
+east_images = [pygame.image.load(f".\\map\\images\\E{i}") for i in range(3)]
+west_images = [pygame.image.load(f".\\map\\images\\W{i}") for i in range(3)]
+south_images = [pygame.image.load(f".\\map\\images\\S{i}") for i in range(3)]
 test_player = PlayerTextureRenderer(100, 100, {"North": north_images,
                                                "East": east_images,
                                                "West": west_images,
