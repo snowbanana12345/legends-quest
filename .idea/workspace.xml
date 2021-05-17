@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a48a1e69-5e18-4351-b7a1-6bfca761c2d7" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/data/game_data/maps/tutorial_island_forest" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/map/map_editor/map_editor_gui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/map_editor/map_texture_editor.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/map_editor/map_editor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/map/texture_id_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/map/texture_id_manager.py" afterDir="false" />
