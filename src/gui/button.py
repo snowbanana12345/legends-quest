@@ -6,7 +6,6 @@ class Button:
         self.xlength = xlength
         self.ylength = ylength
 
-
     def press(self):
         self.pressed = True
 
@@ -15,3 +14,6 @@ class Button:
 
     def check_inside(self, x, y):
         return (self.xpos <= x <= self.xpos + self.xlength) and (self.ypos <= y <= self.ypos + self.ylength)
+
+    def is_pressed(self):
+        return self.pressed
