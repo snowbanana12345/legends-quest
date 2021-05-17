@@ -26,12 +26,21 @@ class MapEditor:
     def update_tile_type(self, xpos, ypos, tile_type):
         self.grid_tile_type_map[(xpos, ypos)] = tile_type
 
+    """
+    Returns a copy of the grid texture id data
+    """
     def get_grid_texture_map(self):
         return self.grid_texture_id_map.copy()
 
+    """
+    Returns a copy of the grid type data
+    """
     def get_grid_tile_type_map(self):
         return self.grid_tile_type_map.copy()
 
+    """
+    saves to a file inside the working folder
+    """
     def write(self, file_name):
         file_path = os.path.join(self.working_folder, file_name + self.file_extension)
         with open(file_path, "w") as map_data_file:
@@ -43,6 +52,9 @@ class MapEditor:
                 tile_type = self.grid_tile_type_map[grid_coord] if self.grid_tile_type_map[grid_coord] else "VALID"
                 map_data_file.write(str(tile_type) + "\n")
 
+    """
+    loads a file from inside the working folder
+    """
     def load(self, file_name):
         file_path = os.path.join(self.working_folder, file_name + self.file_extension)
         with open(file_path, "w") as map_data_file:
