@@ -3,6 +3,10 @@ import pygame
 import definitions
 
 root = definitions.ROOTDIR
+"""
+Manages iding of texture files
+DO NOT use space separated strings or special symbols as keys!!!
+"""
 class TextureIdManager:
     def __init__(self):
         self.id_texture_map = {}
