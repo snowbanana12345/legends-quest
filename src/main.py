@@ -1,7 +1,5 @@
 import pygame
 
-
-
 title = "Legend's Quest"
 pygame.init()
 pygame.display.set_caption(title)

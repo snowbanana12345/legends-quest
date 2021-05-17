@@ -1,6 +1,8 @@
 import pygame
+import os
 
 from src.map.map_texture_renderer import MapTextureRenderer
+from src.map.legends_quest_player_renderer import PlayerTextureRenderer
 
 title = "Map Test"
 screen_width = 1000
@@ -39,16 +41,40 @@ test_camera = MapTextureRenderer(screen_width, screen_height, camera_x_center, c
 test_camera.set_grid_texture_map(grid_texture_id_map)
 test_camera.set_tile_type_map(grid_tile_type_map)
 
+# For testing PlayerTextureRenderer
+image_files = os.listdir(".\\map\\images")
+print(image_files)
+north_images = [pygame.image.load(f".\\map\\images\\{img}") for img in image_files if "N" in img]
+east_images = [pygame.image.load(f".\\map\\images\\{img}") for img in image_files if "E" in img]
+west_images = [pygame.image.load(f".\\map\\images\\{img}") for img in image_files if "W" in img]
+south_images = [pygame.image.load(f".\\map\\images\\{img}") for img in image_files if "S" in img]
+test_player = PlayerTextureRenderer(100, 100, {"North": north_images,
+                                               "East": east_images,
+                                               "West": west_images,
+                                               "South": south_images})
+test_player.scale_player_textures()
+test_player.use_image_list = south_images
+
 while running:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_w]:
+        test_player.start_moving()
+        test_player.face_north()
         camera_y_center -= camera_velocity
     if keys[pygame.K_s]:
+        test_player.start_moving()
+        test_player.face_south()
         camera_y_center += camera_velocity
     if keys[pygame.K_a]:
+        test_player.start_moving()
+        test_player.face_west()
         camera_x_center -= camera_velocity
     if keys[pygame.K_d]:
+        test_player.start_moving()
+        test_player.face_east()
         camera_x_center += camera_velocity
+    if not keys[pygame.K_w]:
+        test_player.stop_moving()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -57,5 +83,6 @@ while running:
     screen.fill((0, 0, 0))
     test_camera.set_center(camera_x_center, camera_y_center)
     test_camera.render(screen)
+    test_player.render(screen)
     clock.tick(frame_rate)
     pygame.display.update()
