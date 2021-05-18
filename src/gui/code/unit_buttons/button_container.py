@@ -1,8 +1,10 @@
+from src.gui.code.unit_buttons.box import Box
 from src.gui.code.unit_buttons.button import Button
 
 
-class ButtonContainer:
+class ButtonContainer(Box):
     def __init__(self, xpos, ypos, xlength, ylength):
+        super().__init__(xpos, ypos, xlength, ylength)
         self.button = Button(xpos, ypos, xlength, ylength)
 
     def press(self):
