@@ -1,7 +1,6 @@
 import pygame
 import os
-#import sys
-#sys.path.append("C:\\Users\\Dreamcore\\Documents\\GitHub\\legends-quest")
+
 from src.map.map_texture_renderer import MapTextureRenderer
 from src.map.legends_quest_player_renderer import PlayerTextureRenderer
 
