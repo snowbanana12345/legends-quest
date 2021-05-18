@@ -51,7 +51,7 @@ test_player = PlayerTextureRenderer(100, 100, {"North": north_images,
                                                "West": west_images,
                                                "South": south_images})
 test_player.scale_player_textures()
-test_player.use_image_list = south_images
+test_player.use_image_list = test_player.player_images["South"]
 
 while running:
     keys = pygame.key.get_pressed()
