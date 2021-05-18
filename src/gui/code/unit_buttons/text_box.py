@@ -1,5 +1,5 @@
 import pygame
-from src.gui.square_box import SquareBox
+from src.gui.code.unit_buttons.square_box import SquareBox
 
 
 class TextBox(SquareBox):
