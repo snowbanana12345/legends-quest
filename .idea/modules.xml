@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/pygame_legends_quest.iml" filepath="$PROJECT_DIR$/.idea/pygame_legends_quest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/legends-quest.iml" filepath="$PROJECT_DIR$/.idea/legends-quest.iml" />
     </modules>
   </component>
 </project>
