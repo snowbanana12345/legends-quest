@@ -1,13 +1,17 @@
 import pygame
-from src.gui.code.unit_buttons.square_box import SquareBox
+
+from src.gui.code.unit_buttons.renderable import Renderable
 
 
-class Icon(SquareBox):
-    def __init__(self, xpos, ypos, xlength, ylength, image):
-        super().__init__(xpos, ypos, xlength, ylength)
+
+class Icon(Renderable):
+    def __init__(self, xlength, ylength, image):
+        super().__init__(xlength, ylength)
         self.image = image
-        self.image = pygame.transform.smoothscale(self.image, (xlength, ylength))
+        self.scale()
 
-    def render(self, screen):
-        super().render(screen)
-        screen.blit(self.image, (self.xpos, self.ypos))
+    def scale(self):
+        self.image = pygame.transform.smoothscale(self.image, (self.xlength, self.ylength))
+
+    def render(self, screen, xpos, ypos):
+        screen.blit(self.image, (xpos, ypos))

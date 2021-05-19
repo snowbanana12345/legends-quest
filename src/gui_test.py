@@ -4,7 +4,8 @@ import os
 
 from src.gui.code.composite.scrollable_array import ScrollableFrameIconButtonArray
 from src.gui.code.unit_buttons.icon_button import IconButton
-from src.gui.code.unit_buttons.picture_frame import PictureFrameWithIcon
+from src.gui.code.unit_buttons.image_with_frame import ImageWithFrame
+from src.gui.code.unit_buttons.outline import Outline
 
 title = "gui test"
 pygame.init()
@@ -31,23 +32,38 @@ arrow_up =  pygame.image.load(os.path.join(root_dir, "src\\gui\\images\\test_ima
 arrow_down =  pygame.image.load(os.path.join(root_dir, "src\\gui\\images\\test_images", "enchanted_down_arrow.png"))
 
 scrollable_array_test = ScrollableFrameIconButtonArray(350, 250, 400, 400, 3, 2)
-scrollable_array_test.add_button(waifu_1, vines_frame, "waifu_1")
-scrollable_array_test.add_button(waifu_2, vines_frame, "waifu_2")
-scrollable_array_test.add_button(tsudere_1, vines_frame, "tsudere_1")
-scrollable_array_test.add_button(tsudere_2, vines_frame, "tsudere_2")
-scrollable_array_test.add_button(dark_souls_knight, vines_frame, "dark_souls_knight")
-scrollable_array_test.add_button(obama, vines_frame, "obama")
-scrollable_array_test.add_button(waifu_3, vines_frame, "waifu_3")
-scrollable_array_test.add_button(waifu_4, vines_frame, "waifu_4")
-scrollable_array_test.add_button(musclular_1, vines_frame, "musclular_1")
-scrollable_array_test.add_button(musclular_2, vines_frame, "musclular_2")
-scrollable_array_test.add_button(musclular_3, vines_frame, "musclular_3")
+width, height = scrollable_array_test.get_required_image_dimensions()
+
+waifu_1_frame = ImageWithFrame(width, height,waifu_1, vines_frame)
+waifu_2_frame = ImageWithFrame(width, height,waifu_2, vines_frame)
+waifu_3_frame = ImageWithFrame(width, height,waifu_3, vines_frame)
+waifu_4_frame = ImageWithFrame(width, height,waifu_4, vines_frame)
+tsudere_1_frame = ImageWithFrame(width, height, tsudere_1, vines_frame)
+tsudere_2_frame = ImageWithFrame(width, height, tsudere_2, vines_frame)
+dark_souls_frame = ImageWithFrame(width, height, dark_souls_knight, vines_frame)
+obama_frame = ImageWithFrame(width, height, obama, vines_frame)
+muscular_1_frame = ImageWithFrame(width, height, musclular_1, vines_frame)
+muscular_2_frame = ImageWithFrame(width, height, musclular_2, vines_frame)
+muscular_3_frame = ImageWithFrame(width, height, musclular_3, vines_frame)
+
+scrollable_array_test.add_button(waifu_1_frame, "waifu_1")
+scrollable_array_test.add_button(waifu_2_frame, "waifu_2")
+scrollable_array_test.add_button(tsudere_1_frame, "tsudere_1")
+scrollable_array_test.add_button(tsudere_2_frame, "tsudere_2")
+scrollable_array_test.add_button(dark_souls_frame, "dark_souls_knight")
+scrollable_array_test.add_button(obama_frame, "obama")
+scrollable_array_test.add_button(waifu_3_frame, "waifu_3")
+scrollable_array_test.add_button(waifu_4_frame, "waifu_4")
+scrollable_array_test.add_button(muscular_1_frame, "musclular_1")
+scrollable_array_test.add_button(muscular_2_frame, "musclular_2")
+scrollable_array_test.add_button(muscular_3_frame, "musclular_3")
 
 up_arrow_button = IconButton(300, 250, 50, 200, arrow_up)
 down_arrow_button = IconButton(300, 450, 50, 200, arrow_down)
-
+outline = Outline(470, 420, 10, (255, 255, 255))
 
 while running:
+    screen.fill((0,0,0))
     recieved_button_id = None
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -57,14 +73,14 @@ while running:
             if scrollable_array_test.check_inside(mouse_x, mouse_y):
                 recieved_button_id = scrollable_array_test.click(mouse_x, mouse_y)
             elif up_arrow_button.check_inside(mouse_x, mouse_y):
-                print("clicked up arrow")
                 scrollable_array_test.move_pointer_up()
             elif down_arrow_button.check_inside(mouse_x, mouse_y):
-                print("clicked down arrow")
                 scrollable_array_test.move_pointer_down()
 
     if recieved_button_id:
         print(recieved_button_id)
+
+    outline.render(screen, 290, 240)
     up_arrow_button.render(screen)
     down_arrow_button.render(screen)
     scrollable_array_test.render(screen)

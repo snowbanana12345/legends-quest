@@ -27,16 +27,18 @@ class ScrollableFrameIconButtonArray(Box):
         self.y_divisions = y_divisions
         self.default_image_with_frame = None
 
+    def get_required_image_dimensions(self):
+        return (self.images_width, self.images_height)
+
     def set_default_image_with_frame(self, image_with_frame):
         self.default_image_with_frame = image_with_frame
 
-    def add_button(self, image, frame_image, button_id):
+    def add_button(self, renderable, button_id):
         if self.check_id_already_used(button_id):
             print("Warning! : duplicate button ids")
-        new_image_with_frame = ImageWithFrame(self.images_width, self.images_height, image, frame_image)
         self.image_number += 1
         self.button_number_id_map[self.image_number] = button_id
-        self.button_number_image_with_frame_map[self.image_number] = new_image_with_frame
+        self.button_number_image_with_frame_map[self.image_number] = renderable
         self.pointer_limit = max(0, math.ceil(self.image_number / self.x_divisions) - 2)
 
     def check_id_already_used(self, new_button_id):
@@ -46,12 +48,12 @@ class ScrollableFrameIconButtonArray(Box):
         return False
 
     def move_pointer_down(self):
-        if self.pointer <= 0 or self.pointer >= self.pointer_limit:
+        if self.pointer >= self.pointer_limit:
             return None
         self.pointer += 1
 
     def move_pointer_up(self):
-        if self.pointer <= 0 or self.pointer >= self.pointer_limit:
+        if self.pointer <= 0:
             return None
         self.pointer -= 1
 
