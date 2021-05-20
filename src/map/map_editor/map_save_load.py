@@ -46,7 +46,7 @@ class MapSaveLoad:
         file_path = os.path.join(self.working_folder, file_name)
         if os.stat(file_path).st_size == 0:
             return False
-        with open(file_path, "w") as map_data_file:
+        with open(file_path, "r") as map_data_file:
             for line in map_data_file:
                 line_data = line.split(self.separator_string)
                 grid_coord_x = int(line_data[0])

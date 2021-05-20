@@ -25,13 +25,13 @@ class ScrollableFrameIconButtonArray(Box):
         self.images_height = ylength / y_divisions
         self.x_divisions = x_divisions
         self.y_divisions = y_divisions
-        self.default_image_with_frame = None
+        self.default_image = None
 
     def get_required_image_dimensions(self):
         return (self.images_width, self.images_height)
 
-    def set_default_image_with_frame(self, image_with_frame):
-        self.default_image_with_frame = image_with_frame
+    def set_default_image(self, image):
+        self.default_image = image
 
     def add_button(self, renderable, button_id):
         if self.check_id_already_used(button_id):
@@ -81,8 +81,8 @@ class ScrollableFrameIconButtonArray(Box):
                 if image_number <= self.image_number:
                     image_with_frame = self.button_number_image_with_frame_map[image_number]
                     image_with_frame.render(screen, image_x_pos, image_y_pos)
-                elif self.default_image_with_frame is not None:
-                    self.default_image_with_frame.render(screen, image_x_pos, image_y_pos)
+                elif self.default_image is not None:
+                    self.default_image.render(screen, image_x_pos, image_y_pos)
 
 
 

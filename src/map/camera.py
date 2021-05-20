@@ -39,6 +39,9 @@ class Camera:
         self.x_center = new_x_center
         self.y_center = new_y_center
 
+    def set_grid_line_width(self, line_width):
+        self.grid_line_width = line_width
+
     """
     this functions returns the tile number that is clicked
     """
@@ -47,7 +50,10 @@ class Camera:
         world_y_coord = int(self.y_center - self.y_pixels / 2 + mouse_y)
         grid_x_coord = world_x_coord // self.camera_grid_x_length
         grid_y_coord = world_y_coord // self.camera_grid_y_length
-        return (grid_x_coord, grid_y_coord)
+        if 0<=grid_x_coord<=self.grid_coord_x_max and 0<=grid_y_coord<=self.grid_coord_y_max:
+            return (grid_x_coord, grid_y_coord)
+        else:
+            return None
 
     # load all of the image files onto this class and scale them appropriately
     # DO NOT update grid_x_coord and grid_y_coord and scale again, this will blur the images
@@ -104,7 +110,11 @@ class Camera:
                 image_screen_x_coord = grid_coord_x * self.camera_grid_x_length - self.x_center + self.x_pixels / 2
                 image_screen_y_coord = grid_coord_y * self.camera_grid_y_length - self.y_center + self.y_pixels / 2
                 image = self.grid_texture_map[(grid_coord_x, grid_coord_y)]
-                screen.blit(image, (image_screen_x_coord, image_screen_y_coord))
+                if image is None: # draw a grey box to indicate the absence of a image
+                    pygame.draw.rect(screen, (128, 128, 128), (image_screen_x_coord, image_screen_y_coord
+                                                               , self.camera_grid_x_length, self.camera_grid_y_length))
+                else :
+                    screen.blit(image, (image_screen_x_coord, image_screen_y_coord))
                 # if tile type viewing is enabled view the tile type
                 if self.tile_type_viewing:
                     tile_type = self.tile_type_map[(grid_coord_x, grid_coord_y)]

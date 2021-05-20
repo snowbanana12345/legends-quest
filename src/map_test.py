@@ -81,7 +81,7 @@ while running:
 
         if event.type == pygame.MOUSEBUTTONUP:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            print(test_camera.click_tile(mouse_x, mouse_y))
+
 
     screen.fill((0, 0, 0))
     test_camera.set_center(camera_x_center, camera_y_center)
