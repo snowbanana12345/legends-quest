@@ -1,16 +1,17 @@
 import pygame
 import os
 
-from src.map.map_texture_renderer import MapTextureRenderer
+from src.map.camera import Camera
 from src.map.legends_quest_player_renderer import PlayerTextureRenderer
+from src.map.texture_id_manager import TextureIdManager
 
 title = "Map Test"
 screen_width = 1000
 screen_height = 800
 frame_rate = 60
 
-camera_x_center = 500
-camera_y_center = 500
+camera_x_center = 0
+camera_y_center = 0
 world_grid_x_length = 300
 world_grid_y_length = 300
 camera_velocity = 10
@@ -36,8 +37,8 @@ grid_tile_type_map = {(0, 0): "INVALID", (1, 0): "INVALID", (2, 0): "INVALID",
                        (0, 3): "VALID", (1, 3): "VALID", (2, 3): "INVALID",
                        (3, 3): "INVALID"}
 
-test_camera = MapTextureRenderer(screen_width, screen_height, camera_x_center, camera_y_center,
-                                 world_grid_x_length, world_grid_y_length)
+test_camera = Camera(screen_width, screen_height, camera_x_center, camera_y_center,
+                     world_grid_x_length, world_grid_y_length, TextureIdManager())
 test_camera.set_grid_texture_map(grid_texture_id_map)
 test_camera.set_tile_type_map(grid_tile_type_map)
 
@@ -77,6 +78,10 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+        if event.type == pygame.MOUSEBUTTONUP:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            print(test_camera.click_tile(mouse_x, mouse_y))
 
     screen.fill((0, 0, 0))
     test_camera.set_center(camera_x_center, camera_y_center)

@@ -11,7 +11,7 @@ class Icon(Renderable):
         self.scale()
 
     def scale(self):
-        self.image = pygame.transform.smoothscale(self.image, (self.xlength, self.ylength))
+        self.image = pygame.transform.smoothscale(self.image, (int(self.xlength), int(self.ylength)))
 
     def render(self, screen, xpos, ypos):
         screen.blit(self.image, (xpos, ypos))

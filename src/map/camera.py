@@ -4,8 +4,8 @@ from src.map.texture_id_manager import TextureIdManager
 """
 This class is a camera!
 """
-class MapTextureRenderer:
-    def __init__(self, x_pixels, y_pixels, xcenter, ycenter, camera_grid_x_length, camera_grid_y_length):
+class Camera:
+    def __init__(self, x_pixels, y_pixels, xcenter, ycenter, camera_grid_x_length, camera_grid_y_length, texture_id_manager):
         self.x_pixels = x_pixels # x size of the map display
         self.y_pixels = y_pixels # y size of the map display
         self.camera_grid_x_length = camera_grid_x_length # the x length of the grid as it will appear on the screen
@@ -18,6 +18,7 @@ class MapTextureRenderer:
         self.grid_coord_y_max = 0
         self.move_velocity = 5
 
+        # tile type variables
         self.tile_type_map = {}
         self.tile_type_viewing = True
         self.tile_type_colors = {
@@ -25,14 +26,28 @@ class MapTextureRenderer:
             "VALID" : (0, 255, 0)
         }
 
-        self.texture_id_manager = TextureIdManager()
+        self.texture_id_manager = texture_id_manager
 
+        # draw grid line variables
+        self.grid_viewing = True
+        self.grid_line_color = (255,255,255)
+        self.grid_line_width = 5
     """
     Call this function to continuously update the center of the camera
     """
     def set_center(self, new_x_center, new_y_center):
         self.x_center = new_x_center
         self.y_center = new_y_center
+
+    """
+    this functions returns the tile number that is clicked
+    """
+    def click_tile(self, mouse_x, mouse_y):
+        world_x_coord = int(self.x_center - self.x_pixels / 2 + mouse_x)
+        world_y_coord = int(self.y_center - self.y_pixels / 2 + mouse_y)
+        grid_x_coord = world_x_coord // self.camera_grid_x_length
+        grid_y_coord = world_y_coord // self.camera_grid_y_length
+        return (grid_x_coord, grid_y_coord)
 
     # load all of the image files onto this class and scale them appropriately
     # DO NOT update grid_x_coord and grid_y_coord and scale again, this will blur the images
@@ -86,8 +101,8 @@ class MapTextureRenderer:
         for grid_coord_x in range(curr_top_left_grid_x, curr_bottom_right_grid_x + 1):
             for grid_coord_y in range(curr_top_left_grid_y, curr_bottom_right_grid_y + 1):
                 # create the tile image
-                image_screen_x_coord = grid_coord_x * self.camera_grid_x_length - self.x_center
-                image_screen_y_coord = grid_coord_y * self.camera_grid_y_length - self.y_center
+                image_screen_x_coord = grid_coord_x * self.camera_grid_x_length - self.x_center + self.x_pixels / 2
+                image_screen_y_coord = grid_coord_y * self.camera_grid_y_length - self.y_center + self.y_pixels / 2
                 image = self.grid_texture_map[(grid_coord_x, grid_coord_y)]
                 screen.blit(image, (image_screen_x_coord, image_screen_y_coord))
                 # if tile type viewing is enabled view the tile type
@@ -100,6 +115,22 @@ class MapTextureRenderer:
                     transparent_surface.fill(tile_type_color)
                     screen.blit(transparent_surface, (tile_type_x_coord, tile_type_y_coord))
 
+        if self.grid_viewing:
+            # world coordinates of the boundary grid points
+            grid_boundary_x_coords = [grid_x * self.camera_grid_x_length - self.x_center + self.x_pixels / 2
+                                      for grid_x in range(curr_top_left_grid_x, curr_bottom_right_grid_x + 2)]
+            grid_boundary_y_coords = [grid_y * self.camera_grid_y_length - self.y_center + self.y_pixels / 2
+                                      for grid_y in range(curr_top_left_grid_y, curr_bottom_right_grid_y + 2)]
+
+            # draw vertical grid lines
+            for grid_boundary_x_coord in grid_boundary_x_coords:
+                pygame.draw.line(screen, self.grid_line_color, (grid_boundary_x_coord, grid_boundary_y_coords[0])
+                                 , (grid_boundary_x_coord, grid_boundary_y_coords[-1]), width = self.grid_line_width)
+
+            # draw horizontal grid lines
+            for grid_boundary_y_coord in grid_boundary_y_coords:
+                pygame.draw.line(screen, self.grid_line_color, (grid_boundary_x_coords[0],grid_boundary_y_coord)
+                                 , (grid_boundary_x_coords[-1], grid_boundary_y_coord), width=self.grid_line_width)
 
 
 
