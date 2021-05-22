@@ -14,3 +14,9 @@ class Button(Box):
 
     def is_pressed(self):
         return self.pressed
+
+    def flip(self):
+        if self.pressed:
+            self.pressed = False
+        else:
+            self.pressed = True

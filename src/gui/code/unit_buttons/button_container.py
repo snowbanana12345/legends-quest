@@ -14,4 +14,7 @@ class ButtonContainer(Box):
         self.button.lift()
 
     def is_pressed(self):
-        self.button.is_pressed()
+        return self.button.is_pressed()
+
+    def flip(self):
+        self.button.flip()

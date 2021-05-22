@@ -7,7 +7,7 @@ from src.gui.code.unit_buttons.image_with_frame import ImageWithFrame
 Example :
 x_divisions = 4
 y_divisions = 3
-this creates an array of image and buttons that is 4 x 3 images
+this creates an array of image and gui_backgrounds that is 4 x 3 images
 
 self.pointer points at the top row of images
 self.pointer = 1 implies that the top row are images, 5,6,7,8

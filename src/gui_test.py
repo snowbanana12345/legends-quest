@@ -6,6 +6,8 @@ from src.gui.code.composite.scrollable_array import ScrollableFrameIconButtonArr
 from src.gui.code.unit_buttons.icon_button import IconButton
 from src.gui.code.unit_buttons.image_with_frame import ImageWithFrame
 from src.gui.code.unit_buttons.outline import Outline
+from src.gui.code.unit_buttons.selectable_text_box_button import SelectableTextBoxButton
+from src.gui.code.unit_buttons.text_box import TextBox
 
 title = "gui test"
 pygame.init()
@@ -15,6 +17,7 @@ running = True
 
 root_dir = definitions.ROOTDIR
 
+# ---------- load images -----------------
 waifu_1 = pygame.image.load(os.path.join(root_dir, "src\\gui\\images\\test_images", "waifu_1.png"))
 waifu_2 = pygame.image.load(os.path.join(root_dir, "src\\gui\\images\\test_images", "waifu_2.png"))
 waifu_3 = pygame.image.load(os.path.join(root_dir, "src\\gui\\images\\test_images", "waifu_3.png"))
@@ -27,10 +30,12 @@ vines_frame = pygame.image.load(os.path.join(root_dir, "src\\gui\\images\\test_i
 musclular_1 = pygame.image.load(os.path.join(root_dir, "src\\gui\\images\\test_images", "muscular_1.png"))
 musclular_2 = pygame.image.load(os.path.join(root_dir, "src\\gui\\images\\test_images", "muscular_2.png"))
 musclular_3 = pygame.image.load(os.path.join(root_dir, "src\\gui\\images\\test_images", "muscular_3.png"))
-
 arrow_up =  pygame.image.load(os.path.join(root_dir, "src\\gui\\images\\test_images", "enchanted_up_arrow.png"))
 arrow_down =  pygame.image.load(os.path.join(root_dir, "src\\gui\\images\\test_images", "enchanted_down_arrow.png"))
+enchanted_wood_button_background = pygame.image.load(os.path.join(root_dir, "src\\gui\\images\\gui_backgrounds", "enchanted_wood_100_x_50.png"))
+select_enchanted_wood_button_background =  pygame.image.load(os.path.join(root_dir, "src\\gui\\images\\gui_backgrounds", "selected_enchanted_wood_100_x_50.png"))
 
+# --------- create gui components ---------------------
 scrollable_array_test = ScrollableFrameIconButtonArray(350, 250, 400, 400, 3, 2)
 width, height = scrollable_array_test.get_required_image_dimensions()
 
@@ -62,6 +67,11 @@ up_arrow_button = IconButton(300, 250, 50, 200, arrow_up)
 down_arrow_button = IconButton(300, 450, 50, 200, arrow_down)
 outline = Outline(470, 420, 10, (255, 255, 255))
 
+text_box_1 = TextBox(100, 50, enchanted_wood_button_background, "BLAH")
+text_box_button = SelectableTextBoxButton(100, 200, 100, 50, enchanted_wood_button_background
+                                          , select_enchanted_wood_button_background, "BLAHBLAH")
+
+# ------------ main loop --------------------
 while running:
     screen.fill((0,0,0))
     recieved_button_id = None
@@ -76,10 +86,16 @@ while running:
                 scrollable_array_test.move_pointer_up()
             elif down_arrow_button.check_inside(mouse_x, mouse_y):
                 scrollable_array_test.move_pointer_down()
+            elif text_box_button.check_inside(mouse_x, mouse_y):
+                text_box_button.flip()
+
+
 
     if recieved_button_id:
         print(recieved_button_id)
 
+    text_box_button.render(screen)
+    #text_box_1.render(screen, 100, 100)
     outline.render(screen, 290, 240)
     up_arrow_button.render(screen)
     down_arrow_button.render(screen)
