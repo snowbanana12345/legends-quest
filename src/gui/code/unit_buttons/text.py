@@ -7,13 +7,9 @@ class Text:
         self.font_size = font_size
         self.color = color
         self.style = style
-
-    def create_text_obj(self):
-        font = pygame.font.SysFont(self.style, self.font_size)
-        textobj = font.render(self.text, True, self.color)
-        return textobj
+        self.font = pygame.font.SysFont(self.style, self.font_size)
+        self.text_obj = self.font.render(self.text, True, self.color)
 
     def render(self, surface):
-        textobj = self.create_text_obj()
-        surface.blit(textobj, (0, 0))
+        surface.blit(self.text_obj, (0, 0))
 
