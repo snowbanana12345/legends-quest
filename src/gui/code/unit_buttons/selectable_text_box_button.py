@@ -3,7 +3,7 @@ from src.gui.code.unit_buttons.text_box_button import TextBoxButton
 
 
 class SelectableTextBoxButton(TextBoxButton):
-    def __init__(self, xpos, ypos, xlength, ylength, background_unselect, background_select,text):
+    def __init__(self, xpos, ypos, xlength, ylength, background_unselect, background_select, text):
         super().__init__(xpos, ypos, xlength, ylength, background_unselect, text)
         self.select_text_box = TextBox(xlength, ylength, background_select, text)
 

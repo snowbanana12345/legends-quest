@@ -6,7 +6,6 @@ class CenteredText(Text):
         super().__init__(text, font_size, color, style)
 
     def render(self, surface):
-        textobj = self.create_text_obj()
-        xpos = surface.get_width() / 2 - textobj.get_width()/2
-        ypos = surface.get_height() / 2 - textobj.get_height()/2
-        surface.blit(textobj, (xpos, ypos))
+        xpos = surface.get_width() / 2 - self.text_obj.get_width()/2
+        ypos = surface.get_height() / 2 - self.text_obj.get_height()/2
+        surface.blit(self.text_obj, (xpos, ypos))

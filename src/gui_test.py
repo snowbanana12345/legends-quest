@@ -68,8 +68,10 @@ down_arrow_button = IconButton(300, 450, 50, 200, arrow_down)
 outline = Outline(470, 420, 10, (255, 255, 255))
 
 text_box_1 = TextBox(100, 50, enchanted_wood_button_background, "BLAH")
-text_box_button = SelectableTextBoxButton(100, 200, 100, 50, enchanted_wood_button_background
-                                          , select_enchanted_wood_button_background, "BLAHBLAH")
+text_box_button_1 = SelectableTextBoxButton(100, 200, 100, 50, enchanted_wood_button_background.copy()
+                                          , select_enchanted_wood_button_background.copy(), "BUTTON_1")
+text_box_button_2 = SelectableTextBoxButton(100, 250, 100, 50, enchanted_wood_button_background.copy()
+                                          , select_enchanted_wood_button_background.copy(), "HAHAHAHAHA")
 
 # ------------ main loop --------------------
 while running:
@@ -92,7 +94,8 @@ while running:
     if recieved_button_id:
         print(recieved_button_id)
 
-    text_box_button.render(screen)
+    text_box_button_1.render(screen)
+    text_box_button_2.render(screen)
     #text_box_1.render(screen, 100, 100)
     outline.render(screen, 290, 240)
     up_arrow_button.render(screen)
