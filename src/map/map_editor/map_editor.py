@@ -41,7 +41,7 @@ class MapEditor:
     allows another variable to point to this map
     """
     def get_grid_texture_map(self):
-        return self.grid_texture_id_map.copy()
+        return self.grid_texture_id_map
 
     """
     Returns a copy of the grid type data

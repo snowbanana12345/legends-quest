@@ -11,6 +11,7 @@ from src.map.texture_id_manager import TextureIdManager
 title = "Map Editor Mode"
 screen_width = 1000
 screen_height = 800
+frame_rate = 10
 
 camera_x_center = 0
 camera_y_center = 0
@@ -21,6 +22,7 @@ camera_velocity = 10
 modes = ["TEXTURE_MODE", "TILE_TYPE_MODE"]
 mode = "TEXTURE_MODE"
 
+texture_category = "forest"
 curr_texture = None
 curr_texture_icon_x, curr_texture_icon_y = 800, 200
 scrollable_x_pos, scrollable_y_pos = 700, 400
@@ -49,20 +51,19 @@ if loaded: # the file already exists, point everything to this data set
     tile_type_data = map_save_load.get_grid_tile_type_map()
     map_editor.set_grid_texture_id_map(texture_data)
     map_editor.set_tile_type_map(tile_type_data)
+    camera.set_grid_texture_map(texture_data)
+    camera.set_tile_type_map(tile_type_data)
 else : # we started off with an empty file, we now create the map with a specified grid_x and grid_y
     map_editor.create_empty_maps(grid_x, grid_y)
-    texture_data = map_editor.get_grid_texture_map()
-    tile_type_data = map_editor.get_grid_tile_type_map()
-
-camera.set_tile_type_map(tile_type_data)
-camera.set_grid_texture_map(texture_data)
+    camera.set_grid_texture_map(map_editor.get_grid_texture_map())
+    camera.set_tile_type_map(map_editor.get_grid_tile_type_map())
 
 
 # ---------- gui components ------------
 texture_selection_scroller = ScrollableFrameIconButtonArray(scrollable_x_pos, scrollable_y_pos
                                                             , scrollable_x_length, scrollable_y_length, 3, 4)
 image_x_length, image_y_length = texture_selection_scroller.get_required_image_dimensions()
-forest_tiles = texture_id_manager.get_category("forest")
+forest_tiles = texture_id_manager.get_category(texture_category)
 active_texture_icons = {}
 for key in forest_tiles:
     button_icon = Icon(image_x_length, image_y_length, forest_tiles[key])
@@ -72,7 +73,8 @@ obama = pygame.image.load(os.path.join(definitions.ROOTDIR, "src\\gui\\images\\t
 obama_icon = Icon(image_x_length, image_y_length, obama)
 texture_selection_scroller.set_default_image(obama_icon)
 
-
+#camera.set_grid_texture_map(map_editor.get_grid_texture_map())
+#camera.set_tile_type_map(map_editor.get_grid_tile_type_map())
 
 # ---- pygame main loop -----
 pygame.init()
@@ -99,18 +101,18 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        if event.type == pygame.MOUSEBUTTONUP:
+        if pygame.mouse.get_pressed()[0]:
             mouse_x, mouse_y = pygame.mouse.get_pos()
             if texture_selection_scroller.check_inside(mouse_x, mouse_y):
                 curr_texture = texture_selection_scroller.click(mouse_x, mouse_y)
-            else:
+            elif curr_texture is not None:
                 curr_grid_pos = camera.click_tile(mouse_x, mouse_y)
                 if curr_grid_pos:
-                    map_editor.update_tile_texture_id(curr_grid_pos[0], curr_grid_pos[1], curr_texture)
+                    stored_key = texture_id_manager.catenate_category_key(texture_category, curr_texture)
+                    camera.update_texture(curr_grid_pos, stored_key)
+                    map_editor.update_tile_texture_id(curr_grid_pos[0], curr_grid_pos[1], stored_key)
 
     screen.fill((0, 0, 0))
-    camera.set_grid_texture_map(map_editor.get_grid_texture_map())
-    camera.set_tile_type_map(map_editor.get_grid_tile_type_map())
     camera.set_center(camera_x_center, camera_y_center)
     camera.render(screen)
 
@@ -122,4 +124,6 @@ while running:
 
     pygame.display.update()
 
+map_save_load.set_grid_texture_id_map(map_editor.get_grid_texture_map())
+map_save_load.set_grid_tile_type_map(map_editor.get_grid_tile_type_map())
 map_save_load.save(file_name)

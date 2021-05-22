@@ -48,6 +48,8 @@ class MapSaveLoad:
             return False
         with open(file_path, "r") as map_data_file:
             for line in map_data_file:
+                if line == "\n":
+                    continue
                 line_data = line.split(self.separator_string)
                 grid_coord_x = int(line_data[0])
                 grid_coord_y = int(line_data[1])
@@ -55,4 +57,8 @@ class MapSaveLoad:
                 tile_type = line_data[3]
                 self.grid_texture_id_map[(grid_coord_x, grid_coord_y)] = texture_id
                 self.grid_tile_type_map[(grid_coord_x, grid_coord_y)] = tile_type
+
+        # ---- clean up the file ------
+        for grid_pos in self.grid_tile_type_map:
+            self.grid_tile_type_map[grid_pos] = self.grid_tile_type_map[grid_pos].replace("\n","")
         return True

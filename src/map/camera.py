@@ -68,6 +68,12 @@ class Camera:
             self.grid_texture_map[grid_coord] = self.texture_id_manager.get_map_tile(key)
         self.scale_texture_maps()
 
+    def update_texture(self, grid_pos, new_texture_key):
+        self.grid_texture_id_map[grid_pos] = new_texture_key
+        new_texture_image = self.texture_id_manager.get_map_tile(new_texture_key)
+        scaled_new_texture_image = self.scale_texture_image(new_texture_image)
+        self.grid_texture_map[grid_pos] = scaled_new_texture_image
+
     def set_tile_type_map(self, tile_type_map):
         self.tile_type_map = tile_type_map
 
@@ -77,11 +83,14 @@ class Camera:
     def disable_tile_type_viewing(self):
         self.tile_type_viewing = False
 
+    def scale_texture_image(self, texture_image):
+        return pygame.transform.smoothscale(texture_image, (self.camera_grid_x_length, self.camera_grid_y_length))
+
     def scale_texture_maps(self):
         for grid_coord in self.grid_texture_map:
             image = self.grid_texture_map[grid_coord]
             if image is not None:
-                self.grid_texture_map[grid_coord] = pygame.transform.smoothscale(image, (self.camera_grid_x_length, self.camera_grid_y_length))
+                self.grid_texture_map[grid_coord] = self.scale_texture_image(image)
 
     """
     This class renders as many tiles that could fit onto the screen
@@ -119,9 +128,9 @@ class Camera:
                 if self.tile_type_viewing:
                     tile_type = self.tile_type_map[(grid_coord_x, grid_coord_y)]
                     tile_type_color = self.tile_type_colors[tile_type]
-                    transparent_surface = pygame.Surface((self.camera_grid_x_length // 2, self.camera_grid_y_length // 2))
-                    tile_type_x_coord = image_screen_x_coord + self.camera_grid_x_length // 4
-                    tile_type_y_coord = image_screen_y_coord + self.camera_grid_y_length // 4
+                    transparent_surface = pygame.Surface((self.camera_grid_x_length // 4, self.camera_grid_y_length // 4))
+                    tile_type_x_coord = image_screen_x_coord + (self.camera_grid_x_length // 8) * 3
+                    tile_type_y_coord = image_screen_y_coord + (self.camera_grid_y_length // 8) * 3
                     transparent_surface.fill(tile_type_color)
                     screen.blit(transparent_surface, (tile_type_x_coord, tile_type_y_coord))
 

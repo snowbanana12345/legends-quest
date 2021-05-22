@@ -3,6 +3,7 @@ import os
 
 from src.map.camera import Camera
 from src.map.legends_quest_player_renderer import PlayerTextureRenderer
+from src.map.map_editor.map_save_load import MapSaveLoad
 from src.map.texture_id_manager import TextureIdManager
 
 title = "Map Test"
@@ -10,10 +11,10 @@ screen_width = 1000
 screen_height = 800
 frame_rate = 60
 
-camera_x_center = 0
-camera_y_center = 0
-world_grid_x_length = 300
-world_grid_y_length = 300
+camera_x_center = 500
+camera_y_center = 500
+world_grid_x_length = 50
+world_grid_y_length = 50
 camera_velocity = 10
 
 pygame.init()
@@ -22,7 +23,16 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
 running = True
 
+file_name = "tutorial_island_forest"
+
+map_save_load = MapSaveLoad()
+map_save_load.load(file_name)
+grid_texture_id_map = map_save_load.get_grid_texture_id_map()
+grid_tile_type_map = map_save_load.get_grid_tile_type_map()
+
+
 # world coordinates are x = 0 to x = 1200, y = 0 to y = 1200
+"""
 grid_texture_id_map = {(0, 0): "forest_fresh_grass", (1, 0): "forest_short_grass", (2, 0): "forest_short_grass",
                        (3, 0): "forest_thick_grass", (0, 1): "forest_thick_grass", (1, 1): "forest_fresh_grass",
                        (2, 1): "forest_short_grass", (3, 1): "forest_thick_grass", (0, 2): "forest_short_grass",
@@ -36,6 +46,7 @@ grid_tile_type_map = {(0, 0): "INVALID", (1, 0): "INVALID", (2, 0): "INVALID",
                        (1, 2): "VALID", (2, 2): "VALID", (3, 2): "INVALID",
                        (0, 3): "VALID", (1, 3): "VALID", (2, 3): "INVALID",
                        (3, 3): "INVALID"}
+"""
 
 test_camera = Camera(screen_width, screen_height, camera_x_center, camera_y_center,
                      world_grid_x_length, world_grid_y_length, TextureIdManager())

@@ -29,6 +29,9 @@ class TextureIdManager:
     def get_category(self, category):
         return self.category_map[category]
 
+    def catenate_category_key(self, category, key):
+        return category + "_" + key
+
     """
     This functions assumes that the format of the key is "{category}_{key}"
     """
