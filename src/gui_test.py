@@ -89,8 +89,6 @@ while running:
             elif text_box_button.check_inside(mouse_x, mouse_y):
                 text_box_button.flip()
 
-
-
     if recieved_button_id:
         print(recieved_button_id)
 

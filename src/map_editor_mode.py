@@ -3,10 +3,13 @@ import pygame
 import definitions
 from src.gui.code.composite.scrollable_array import ScrollableFrameIconButtonArray
 from src.gui.code.unit_buttons.icon import Icon
+from src.gui.code.unit_buttons.selectable_text_box_button import SelectableTextBoxButton
 from src.map.camera import Camera
 from src.map.map_editor.map_editor import MapEditor
 from src.map.map_editor.map_save_load import MapSaveLoad
 from src.map.texture_id_manager import TextureIdManager
+
+root_dir = definitions.ROOTDIR
 
 title = "Map Editor Mode"
 screen_width = 1000
@@ -73,8 +76,17 @@ obama = pygame.image.load(os.path.join(definitions.ROOTDIR, "src\\gui\\images\\t
 obama_icon = Icon(image_x_length, image_y_length, obama)
 texture_selection_scroller.set_default_image(obama_icon)
 
-#camera.set_grid_texture_map(map_editor.get_grid_texture_map())
-#camera.set_tile_type_map(map_editor.get_grid_tile_type_map())
+enchanted_wood_button_background = pygame.image.load(os.path.join(root_dir, "src\\gui\\images\\gui_backgrounds", "enchanted_wood_100_x_50.png"))
+select_enchanted_wood_button_background =  pygame.image.load(os.path.join(root_dir, "src\\gui\\images\\gui_backgrounds", "selected_enchanted_wood_100_x_50.png"))
+
+texture_mode_button = SelectableTextBoxButton(700, 50, 100, 50, enchanted_wood_button_background
+                                          , select_enchanted_wood_button_background, "TEXTURE")
+tile_type_mode_button = SelectableTextBoxButton(700, 100, 100, 50, enchanted_wood_button_background
+                                          , select_enchanted_wood_button_background, "TILE TYPE")
+valid_tile_type_button = SelectableTextBoxButton(800, 50, 100, 50, enchanted_wood_button_background
+                                          , select_enchanted_wood_button_background, "VALID")
+invalid_tile_type_button = SelectableTextBoxButton(800, 100, 100, 50, enchanted_wood_button_background
+                                          , select_enchanted_wood_button_background, "INVALID")
 
 # ---- pygame main loop -----
 pygame.init()
@@ -82,6 +94,8 @@ pygame.display.set_caption(title)
 screen = pygame.display.set_mode((screen_width, screen_height))
 running = True
 while running:
+    screen.fill((0, 0, 0))
+
     if mode == "TEXTURE_MODE":
         camera.disable_tile_type_viewing()
     if mode == "TILE_TYPE_MODE":
@@ -103,16 +117,18 @@ while running:
 
         if pygame.mouse.get_pressed()[0]:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            if texture_selection_scroller.check_inside(mouse_x, mouse_y):
-                curr_texture = texture_selection_scroller.click(mouse_x, mouse_y)
-            elif curr_texture is not None:
-                curr_grid_pos = camera.click_tile(mouse_x, mouse_y)
-                if curr_grid_pos:
-                    stored_key = texture_id_manager.catenate_category_key(texture_category, curr_texture)
-                    camera.update_texture(curr_grid_pos, stored_key)
-                    map_editor.update_tile_texture_id(curr_grid_pos[0], curr_grid_pos[1], stored_key)
+            if mode == "TEXTURE_MODE":
+                if texture_selection_scroller.check_inside(mouse_x, mouse_y):
+                    curr_texture = texture_selection_scroller.click(mouse_x, mouse_y)
+                elif curr_texture is not None:
+                    curr_grid_pos = camera.click_tile(mouse_x, mouse_y)
+                    if curr_grid_pos:
+                        stored_key = texture_id_manager.catenate_category_key(texture_category, curr_texture)
+                        camera.update_texture(curr_grid_pos, stored_key)
+                        map_editor.update_tile_texture_id(curr_grid_pos[0], curr_grid_pos[1], stored_key)
+            elif mode == "TILE_TYPE_MODE":
+                pass
 
-    screen.fill((0, 0, 0))
     camera.set_center(camera_x_center, camera_y_center)
     camera.render(screen)
 
@@ -120,7 +136,12 @@ while running:
         active_texture_icons[curr_texture].render(screen, curr_texture_icon_x, curr_texture_icon_y)
     else:
         obama_icon.render(screen, curr_texture_icon_x, curr_texture_icon_y)
+
     texture_selection_scroller.render(screen)
+    texture_mode_button.render(screen)
+    tile_type_mode_button.render(screen)
+    #valid_tile_type_button.render(screen)
+    #invalid_tile_type_button.render(screen)
 
     pygame.display.update()
 
