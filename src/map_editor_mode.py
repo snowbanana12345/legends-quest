@@ -42,11 +42,11 @@ curr_tile_type = "VALID"
 grid_x = 100
 grid_y = 100
 grid_line_width = 2
-file_name = "tutorial_island_forest"
+pickle_file_path = os.path.join(root_dir, "data\\game_data\\maps","tutorial_island_forest.pickle")
 
 # ----- initialize classes -----
 texture_id_manager = TextureIdManager()
-map_save_load = MapSaveLoad()
+map_save_load = MapSaveLoad.pickle_load(pickle_file_path)
 camera = Camera(screen_width, screen_height, camera_x_center, camera_y_center
                 , world_grid_x_length, world_grid_y_length, texture_id_manager)
 camera.set_grid_line_width(grid_line_width)
@@ -55,21 +55,18 @@ clock = pygame.time.Clock()
 
 
 # ----- load data ------
-loaded = map_save_load.load(file_name)
-texture_data = {}
-tile_type_data = {}
-if loaded: # the file already exists, point everything to this data set
+if map_save_load:
     texture_data = map_save_load.get_grid_texture_id_map()
     tile_type_data = map_save_load.get_grid_tile_type_map()
     map_editor.set_grid_texture_id_map(texture_data)
     map_editor.set_tile_type_map(tile_type_data)
     camera.set_grid_texture_map(texture_data)
     camera.set_tile_type_map(tile_type_data)
-else : # we started off with an empty file, we now create the map with a specified grid_x and grid_y
+else :
+    map_save_load = MapSaveLoad()
     map_editor.create_empty_maps(grid_x, grid_y)
     camera.set_grid_texture_map(map_editor.get_grid_texture_map())
     camera.set_tile_type_map(map_editor.get_grid_tile_type_map())
-
 
 # ---------- gui components ------------
 texture_selection_scroller = ScrollableFrameIconButtonArray(scrollable_x_pos, scrollable_y_pos
@@ -132,20 +129,24 @@ while running:
 
             if texture_mode_button.check_inside(mouse_x, mouse_y):
                 mode = TEXTURE_MODE
-                texture_mode_button.flip()
-                tile_type_mode_button.flip()
+                if not texture_mode_button.is_pressed():
+                    texture_mode_button.flip()
+                    tile_type_mode_button.flip()
             elif tile_type_mode_button.check_inside(mouse_x, mouse_y):
                 mode = TILE_TYPE_MODE
-                texture_mode_button.flip()
-                tile_type_mode_button.flip()
+                if not tile_type_mode_button.is_pressed():
+                    texture_mode_button.flip()
+                    tile_type_mode_button.flip()
             elif valid_tile_type_button.check_inside(mouse_x, mouse_y):
                 curr_tile_type = TILE_TYPE_VALID
-                valid_tile_type_button.flip()
-                invalid_tile_type_button.flip()
+                if not valid_tile_type_button.is_pressed():
+                    valid_tile_type_button.flip()
+                    invalid_tile_type_button.flip()
             elif invalid_tile_type_button.check_inside(mouse_x, mouse_y):
                 curr_tile_type = TILE_TYPE_INVALID
-                valid_tile_type_button.flip()
-                invalid_tile_type_button.flip()
+                if not invalid_tile_type_button.is_pressed():
+                    valid_tile_type_button.flip()
+                    invalid_tile_type_button.flip()
 
             elif texture_selection_scroller.check_inside(mouse_x, mouse_y):
                 curr_texture = texture_selection_scroller.click(mouse_x, mouse_y)
@@ -183,4 +184,4 @@ while running:
 
 map_save_load.set_grid_texture_id_map(map_editor.get_grid_texture_map())
 map_save_load.set_grid_tile_type_map(map_editor.get_grid_tile_type_map())
-map_save_load.save(file_name)
+map_save_load.pickle_save(pickle_file_path)

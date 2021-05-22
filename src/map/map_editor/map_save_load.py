@@ -1,4 +1,5 @@
 import os
+import pickle
 import definitions
 
 
@@ -38,6 +39,21 @@ class MapSaveLoad:
                 map_data_file.write(str(texture_id) + self.separator_string)
                 tile_type = self.grid_tile_type_map[grid_coord] if self.grid_tile_type_map[grid_coord] else "VALID"
                 map_data_file.write(str(tile_type) + "\n")
+
+    def pickle_save(self, file_name): # file name must have the extension .pickle
+        pickle_file_path = os.path.join(self.working_folder, file_name)
+        with open(pickle_file_path, "wb") as pickle_out:
+            pickle.dump(self, pickle_out)
+
+    """
+    returns the loaded map_save_load file if it exists else returns None
+    """
+    @staticmethod
+    def pickle_load(pickle_file_path):
+        if not os.path.exists(pickle_file_path):
+            return None
+        with open(pickle_file_path, "rb") as pickle_in:
+            return pickle.load(pickle_in)
 
     """
     loads a file from inside the working folder
