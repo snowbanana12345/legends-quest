@@ -88,8 +88,10 @@ while running:
                 scrollable_array_test.move_pointer_up()
             elif down_arrow_button.check_inside(mouse_x, mouse_y):
                 scrollable_array_test.move_pointer_down()
-            elif text_box_button.check_inside(mouse_x, mouse_y):
-                text_box_button.flip()
+            elif text_box_button_1.check_inside(mouse_x, mouse_y):
+                text_box_button_1.flip()
+            elif text_box_button_2.check_inside(mouse_x, mouse_y):
+                text_box_button_2.flip()
 
 
 
