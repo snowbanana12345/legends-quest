@@ -17,7 +17,7 @@ pygame.init()
 title = "Map Editor Mode"
 screen_width = 1000
 screen_height = 800
-frame_rate = 10
+frame_rate = 30
 
 camera_x_center = 0
 camera_y_center = 0
@@ -35,6 +35,8 @@ curr_texture_icon_x, curr_texture_icon_y = 800, 200
 scrollable_x_pos, scrollable_y_pos = 700, 400
 scrollable_x_length, scrollable_y_length = 300, 400
 
+TILE_TYPE_VALID = "VALID"
+TILE_TYPE_INVALID = "INVALID"
 curr_tile_type = "VALID"
 
 grid_x = 100
@@ -49,6 +51,7 @@ camera = Camera(screen_width, screen_height, camera_x_center, camera_y_center
                 , world_grid_x_length, world_grid_y_length, texture_id_manager)
 camera.set_grid_line_width(grid_line_width)
 map_editor = MapEditor()
+clock = pygame.time.Clock()
 
 
 # ----- load data ------
@@ -94,7 +97,8 @@ valid_tile_type_button = SelectableTextBoxButton(800, 50, 100, 50, enchanted_woo
 invalid_tile_type_button = SelectableTextBoxButton(800, 100, 100, 50, enchanted_wood_button_background.copy()
                                           , select_enchanted_wood_button_background.copy(), "INVALID")
 
-
+texture_mode_button.flip()
+valid_tile_type_button.flip()
 
 # ---- pygame main loop -----
 
@@ -104,9 +108,9 @@ running = True
 while running:
     screen.fill((0, 0, 0))
 
-    if mode == "TEXTURE_MODE":
+    if mode == TEXTURE_MODE:
         camera.disable_tile_type_viewing()
-    if mode == "TILE_TYPE_MODE":
+    if mode == TILE_TYPE_MODE:
         camera.enable_tile_type_viewing()
 
     keys = pygame.key.get_pressed()
@@ -125,21 +129,40 @@ while running:
 
         if pygame.mouse.get_pressed()[0]:
             mouse_x, mouse_y = pygame.mouse.get_pos()
+
             if texture_mode_button.check_inside(mouse_x, mouse_y):
                 mode = TEXTURE_MODE
+                texture_mode_button.flip()
+                tile_type_mode_button.flip()
+            elif tile_type_mode_button.check_inside(mouse_x, mouse_y):
+                mode = TILE_TYPE_MODE
+                texture_mode_button.flip()
+                tile_type_mode_button.flip()
+            elif valid_tile_type_button.check_inside(mouse_x, mouse_y):
+                curr_tile_type = TILE_TYPE_VALID
+                valid_tile_type_button.flip()
+                invalid_tile_type_button.flip()
+            elif invalid_tile_type_button.check_inside(mouse_x, mouse_y):
+                curr_tile_type = TILE_TYPE_INVALID
+                valid_tile_type_button.flip()
+                invalid_tile_type_button.flip()
 
+            elif texture_selection_scroller.check_inside(mouse_x, mouse_y):
+                curr_texture = texture_selection_scroller.click(mouse_x, mouse_y)
 
-            if mode == TEXTURE_MODE:
-                if texture_selection_scroller.check_inside(mouse_x, mouse_y):
-                    curr_texture = texture_selection_scroller.click(mouse_x, mouse_y)
-                elif curr_texture is not None:
+            # from this point on, the mouse should either land on a grid tile, or outside the grid tile
+            # all the gui components have already been checked
+            elif mode == TEXTURE_MODE:
+                if curr_texture is not None:
                     curr_grid_pos = camera.click_tile(mouse_x, mouse_y)
                     if curr_grid_pos:
                         stored_key = texture_id_manager.catenate_category_key(texture_category, curr_texture)
                         camera.update_texture(curr_grid_pos, stored_key)
                         map_editor.update_tile_texture_id(curr_grid_pos[0], curr_grid_pos[1], stored_key)
             elif mode == TILE_TYPE_MODE:
-                pass
+                curr_grid_pos = camera.click_tile(mouse_x, mouse_y)
+                if curr_grid_pos is not None:
+                    map_editor.update_tile_type(curr_grid_pos[0], curr_grid_pos[1], curr_tile_type)
 
     camera.set_center(camera_x_center, camera_y_center)
     camera.render(screen)
@@ -156,6 +179,7 @@ while running:
     invalid_tile_type_button.render(screen)
 
     pygame.display.update()
+    clock.tick(frame_rate)
 
 map_save_load.set_grid_texture_id_map(map_editor.get_grid_texture_map())
 map_save_load.set_grid_tile_type_map(map_editor.get_grid_tile_type_map())

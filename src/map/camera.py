@@ -43,7 +43,8 @@ class Camera:
         self.grid_line_width = line_width
 
     """
-    this functions returns the tile number that is clicked
+    this functions returns the tile number that is clicked if the mouse is within the grid
+    else it returns None
     """
     def click_tile(self, mouse_x, mouse_y):
         world_x_coord = int(self.x_center - self.x_pixels / 2 + mouse_x)
