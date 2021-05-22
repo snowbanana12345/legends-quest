@@ -1,5 +1,9 @@
 .idea/workspace.xml
 .idea/misc.xml
 .idea/pygame_legends_quest.iml
+<<<<<<< HEAD
 
+=======
+*.xml
+>>>>>>> gui_
 *.pyc

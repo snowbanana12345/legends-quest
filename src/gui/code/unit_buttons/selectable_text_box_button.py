@@ -8,7 +8,7 @@ class SelectableTextBoxButton(TextBoxButton):
         self.select_text_box = TextBox(xlength, ylength, background_select, text)
 
     def render(self, screen):
-        if self.is_pressed():
+        if not self.is_pressed():
             self.text_box.render(screen, self.xpos, self.ypos)
         else:
             self.select_text_box.render(screen, self.xpos, self.ypos)
