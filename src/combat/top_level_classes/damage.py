@@ -10,3 +10,6 @@ class Damage(DataStruct):
 
     def get_damage(self, damage_type):
         return self.get_data(damage_type)
+
+    def get_damage_types(self):
+        return iter([key for key in self.dictionary])

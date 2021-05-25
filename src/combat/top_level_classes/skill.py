@@ -16,3 +16,12 @@ class Skill:
 
     def get_skill_costs(self):
         return self.skill_costs
+
+    def get_damage(self):
+        return self.damage
+
+    def get_range(self):
+        return self.range
+
+    def get_buffs(self):
+        return self.buffs

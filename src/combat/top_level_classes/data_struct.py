@@ -16,3 +16,6 @@ class DataStruct:
             return self.default_value
         else :
             return self.dictionary[data_key]
+
+    def get_dictionary(self):
+        return self.dictionary

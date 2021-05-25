@@ -6,3 +6,4 @@ class CombatStatsTypes:
     STAMINA = 6596384
     MAX_STAMINA = 4590843
     STAMINA_REGEN = 199923924
+    SPEED = 177263

@@ -10,3 +10,12 @@ class Buff:
         self.duration = 0
         self.tick_damage = None
         self.combat_stat_modifier = None
+
+    def get_duration(self):
+        return self.duration
+
+    def get_tick_damage(self):
+        return self.tick_damage
+
+    def get_combat_stat_modifier(self):
+        return self.combat_stat_modifier

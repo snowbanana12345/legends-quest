@@ -10,3 +10,6 @@ class SkillCost(DataStruct):
 
     def get_skill_cost(self, cost_type):
         return self.get_skill_cost(cost_type)
+
+    def get_skill_cost_types(self):
+        return [key for key in self.dictionary]
