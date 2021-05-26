@@ -12,6 +12,7 @@ It always costs 1 stamina
 class Punch(Skill):
     def __init__(self):
         super().__init__()
+        self.name = "punch"
         self.damage = Damage()
         self.damage.set_damage(DamageTypes.PHYSICAL, 1)
         self.skill_costs = SkillCost()

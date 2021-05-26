@@ -1,6 +1,5 @@
 """
 Enum class of different damage types
-
 """
 class DamageTypes:
     PURE = 24314

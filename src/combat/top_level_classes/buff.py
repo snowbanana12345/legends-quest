@@ -10,6 +10,10 @@ class Buff:
         self.duration = 0
         self.tick_damage = None
         self.combat_stat_modifier = None
+        self.name = ""
+
+    def get_name(self):
+        return self.name
 
     def get_duration(self):
         return self.duration

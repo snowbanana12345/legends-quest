@@ -1,5 +1,6 @@
 from src.combat.top_level_classes.combat_stats_types import CombatStatsTypes
 from src.combat.top_level_classes.SkillCostTypes import SkillCostTypes
+from src.combat.top_level_classes.damage_report import DamageReport
 
 """
 Abstract class, combat unit participates in combat
@@ -77,12 +78,15 @@ class CombatUnit:
 
     """
     This method calculates what happens when a monster is hit
-    A universal calculation method can be implemented here
+    A standard calculation method can be implemented here
+    Returns a report on the damage the unit took, and the buffs/debuffs the unit applied 
     """
     def hit(self, skill):
         damage = skill.get_damage()
-        for damage_type in damage.get_damage_types:
+        damage_report = DamageReport()
+        for damage_type in damage.get_damage_types():
             amount = damage.get_damage(damage_type)
+            damage_report.set_damage(damage_type, amount)
             self.take_health_damage(amount)
         if self.combat_stats.get_combat_stat(CombatStatsTypes.HEALTH) <= 0:
             self.alive = False
@@ -92,6 +96,8 @@ class CombatUnit:
             new_buff_id = self.get_next_buff_id()
             self.buffs_dict[new_buff_id] = buff
             self.buff_duration_dict[new_buff_id] = buff.get_duration()
+            damage_report.add_buff(buff)
+        return damage_report
 
     def take_health_damage(self, amount):
         health = self.combat_stats.get_combat_stat(CombatStatsTypes.HEALTH)

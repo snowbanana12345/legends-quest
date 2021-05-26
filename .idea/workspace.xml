@@ -2,27 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b31f7d93-a0f1-4030-92ad-a876a6b8c47d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/combat/combat_engine/add_unit_event.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_engine_states.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_event.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_event_types.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/combat/combat_engine/end_turn_event.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/combat/combat_engine/move_event.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/combat/combat_engine/use_skill_event.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/combat/enemy/undead/zombie.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/combat/skills/enemy_skills/scratch.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/definitions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_event_log.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/combat_end_event.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/combat_start_event.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/combat/top_level_classes/damage_report.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/combat_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/add_unit_event.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/add_unit_event.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/test_hero.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/test_hero.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/skills/punch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/skills/hero_skills/punch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/top_level_classes/CombatStatsTypes.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/top_level_classes/combat_stats_types.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_event.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/combat_event.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_event_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/combat_event_types.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/end_turn_event.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/end_turn_event.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/move_event.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/move_event.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/use_skill_event.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/use_skill_event.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/skills/enemy_skills/scratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/skills/enemy_skills/scratch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/skills/hero_skills/punch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/skills/hero_skills/punch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/combat/top_level_classes/buff.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/top_level_classes/buff.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/combat/top_level_classes/combat_unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/top_level_classes/combat_unit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/top_level_classes/damage.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/top_level_classes/damage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/top_level_classes/data_struct.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/top_level_classes/data_struct.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/top_level_classes/enemy.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/top_level_classes/enemy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/top_level_classes/damage_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/top_level_classes/damage_types.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/combat/top_level_classes/skill.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/top_level_classes/skill.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/top_level_classes/skill_cost.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/top_level_classes/skill_cost.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,13 +46,65 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../misc/image_processor" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Interview_coding_projects\pygame_legends_quest\src\combat\combat_engine\combat_events" />
       <recent name="C:\Interview_coding_projects\pygame_legends_quest\src\combat\skills\hero_skills" />
       <recent name="C:\Interview_coding_projects\pygame_legends_quest\src\combat\skills\enemy_skills" />
       <recent name="C:\Interview_coding_projects\pygame_legends_quest\src\combat\top_level_classes" />
     </key>
+  </component>
+  <component name="RunManager" selected="Python.combat_test">
+    <configuration name="combat_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pygame_legends_quest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/combat_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="combat_unit" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pygame_legends_quest" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/combat/top_level_classes" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/combat/top_level_classes/combat_unit.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.combat_test" />
+        <item itemvalue="Python.combat_unit" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

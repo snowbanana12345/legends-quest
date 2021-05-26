@@ -9,10 +9,14 @@ All variables in this class should be FINAL.
 
 class Skill:
     def __init__(self):
+        self.name = ""
         self.damage = None
         self.buffs = []
         self.skill_costs = None
         self.range = 0
+
+    def get_name(self):
+        return self.name
 
     def get_skill_costs(self):
         return self.skill_costs

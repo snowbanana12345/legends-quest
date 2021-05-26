@@ -1,7 +1,9 @@
 from src.combat.combat_engine.combat_engine_states import CombatEngineStates
-from src.combat.combat_engine.combat_event_types import CombatEventTypes
+from src.combat.combat_engine.combat_event_log import CombatEventLog
+from src.combat.combat_engine.combat_events.combat_event_types import CombatEventTypes
 import functools
 import random
+
 
 """
 The responsibility of the combat engine is to store the current state of the combat
@@ -50,15 +52,15 @@ class CombatEngine:
         self.grid_pos_dict = {}  # { grid pos : unit id }
         self.unit_pos_dict = {}  # { unit id : grid pos }
         self.speed_roll_dict = {}  # { unit id : speed roll }
+        self.unit_name_dict = {} # { unit id : unit name } this is for combat logging purposes
         self.turn_order = None  # iterator which keeps generating the id of the combat unit which gets to move next
         self.turn_order_pointer = 0
         self.turn_order_size = 0
         self.threshold_speed = 100
         self.base_speed = 20
-        self.unit_id = 1
-        self.last_used_id = 1
         self.engine_state = CombatEngineStates.INITIAL
         self.active_combat_unit_id = None
+        self.combat_event_log = CombatEventLog()
 
     def reset(self, grid_x, grid_y):
         self.grid_x_length = grid_x
@@ -68,7 +70,6 @@ class CombatEngine:
         self.speed_roll_dict = {}  # { unit id : speed roll }
         self.turn_order = None  # sorted list of unit ids, units that get multiple turns can have their id repeated
         self.engine_state = CombatEngineStates.INITIAL
-        self.reset_id()
         self.active_combat_unit_id = None
 
     """
@@ -87,14 +88,17 @@ class CombatEngine:
                 return False
             if not self.check_valid_position(position):
                 return False
-            new_unit_id = self.next_id()
-            self.add_new_unit(new_combat_unit, new_unit_id, position)
+            new_unit_id = combat_event.get_unit_id()
+            new_unit_name = combat_event.get_new_unit_name()
+            self.add_new_unit(new_combat_unit, new_unit_id, position, new_unit_name)
+            self.combat_event_log.log_add_unit_event(new_unit_name, position)
             return True
 
         elif event_type == CombatEventTypes.USE_SKILL: # skills can only be used during the combat turn
             if not self.engine_state == CombatEngineStates.TURN:
                 return False
             curr_active_combat_unit = self.get_combat_unit(self.active_combat_unit_id)
+            curr_active_combat_unit_name = self.unit_name_dict[self.active_combat_unit_id]
             if not curr_active_combat_unit.is_alive():
                 return False
             skill_num = combat_event.get_skill_num()
@@ -111,11 +115,16 @@ class CombatEngine:
                     continue
                 if not self.check_position_occupied(position):
                     continue
-                target_combat_unit = self.get_combat_unit_at_position(position)
+                target_combat_unit_id = self.get_combat_unit_at_position(position)
+                target_combat_unit = self.combat_units_dict[target_combat_unit_id]
+                target_combat_unit_name = self.unit_name_dict[target_combat_unit_id]
+
                 if not target_combat_unit.is_alive():
                     continue
-                target_combat_unit.hit(skill)
+                damage_report = target_combat_unit.hit(skill)
                 targets_hit = targets_hit + 1
+                self.combat_event_log.log_use_skill_event(curr_active_combat_unit_name
+                                                          , target_combat_unit_name, skill, damage_report)
             if targets_hit == 0:
                 return False
             return True
@@ -132,29 +141,36 @@ class CombatEngine:
             if not self.check_valid_position(new_position) or self.check_position_occupied(new_position):
                 return False
             self.update_combat_unit_position(self.active_combat_unit_id, new_position)
+            curr_active_combat_unit_name = self.unit_name_dict[self.active_combat_unit_id]
+            self.combat_event_log.log_move_event(curr_active_combat_unit_name, curr_position, new_position)
             return True
 
         elif event_type == CombatEventTypes.END_TURN:
             if not self.engine_state == CombatEngineStates.TURN:
                 return False
             next_unit_id = self.get_next_combat_unit_id()
-            if not next_unit_id : # end turn event is sent when the last unit finished it turn
-                self.regenerate_turn_order() # restart the entire combat turn cycle
-                self.tick_all_combat_units() # update the buff/debuff durations of all combat units
+            if not next_unit_id:  # end turn event is sent when the last unit finished it turn
+                self.regenerate_turn_order()  # restart the entire combat turn cycle
+                self.tick_all_combat_units()  # update the buff/debuff durations of all combat units
             else :
                 self.active_combat_unit_id = next_unit_id
+            return True
 
-    def reset_id(self):
-        self.last_used_id = 1
-        self.unit_id = 1
+        elif event_type == CombatEventTypes.START: # start the combat
+            if self.engine_state == CombatEngineStates.TURN or self.engine_state == CombatEngineStates.END:
+                return False
+            self.engine_state = CombatEngineStates.TURN
+            self.regenerate_turn_order()
+            return True
 
-    def next_id(self):
-        self.last_used_id = self.unit_id
-        self.unit_id = self.unit_id + 1
-        return self.unit_id
+        elif event_type == CombatEventTypes.END:
+            if self.engine_state == CombatEngineStates.END or self.engine_state == CombatEngineStates.INITIAL:
+                return False
+            self.engine_state = CombatEngineStates.END
+            return True
 
-    def get_last_used_id(self):
-        return self.last_used_id
+        return False
+
 
     def check_position_occupied(self, position):
         return position in self.grid_pos_dict
@@ -163,10 +179,11 @@ class CombatEngine:
     def check_valid_position(self, position):
         return 0 <= position[0] <= self.grid_x_length and 0 <= position [1] <= self.grid_y_length
 
-    def add_new_unit(self, new_combat_unit, new_unit_id, position):
+    def add_new_unit(self, new_combat_unit, new_unit_id, position, new_unit_name):
         self.grid_pos_dict[position] = new_unit_id
         self.unit_pos_dict[new_unit_id] = position
         self.combat_units_dict[new_unit_id] = new_combat_unit
+        self.unit_name_dict[new_unit_id] = new_unit_name
 
     def get_combat_unit(self, unit_id):
         return self.combat_units_dict[unit_id]

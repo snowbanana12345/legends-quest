@@ -1,5 +1,5 @@
-from src.combat.combat_engine.combat_event import CombatEvent
-from src.combat.combat_engine.combat_event_types import CombatEventTypes
+from src.combat.combat_engine.combat_events.combat_event import CombatEvent
+from src.combat.combat_engine.combat_events.combat_event_types import CombatEventTypes
 
 
 class UseSkillEvent(CombatEvent):
