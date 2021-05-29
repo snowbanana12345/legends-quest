@@ -1,8 +1,6 @@
-import functools
-import random
-
 from src.combat.combat_engine.combat_engine import CombatEngine
 from src.combat.combat_engine.turn_order_generator import TurnOrderGenerator
+from src.combat.combat_engine.unit_id_generator import UnitIdGenerator
 
 """
 Turn ordering rules :
@@ -24,6 +22,11 @@ class CombatMaster:
     def __init__(self):
         self.combat_engine = CombatEngine()
         self.turn_order_generator = TurnOrderGenerator()
+        self.unit_id_generator = UnitIdGenerator()
+
+# ----------- initialization functions ----------------
+    def generate_grid(self, grid_x, grid_y):
+        self.combat_engine.reset(grid_x, grid_y)
 
     def generate_turn_order(self):
         self.turn_order_generator.reset()
@@ -33,7 +36,32 @@ class CombatMaster:
             self.turn_order_generator.add_unit_speed(unit_id, unit_speed)
         self.turn_order_generator.generate_turn_order()
 
-    
+# ---------- combat logic functions ----------------
+# returns True if the action is successfully executed, returns false other wise,
+    # if false is returned, the state of the objects do not change
+
+    def add_combat_unit(self, unit_name, unit_obj, position):
+        new_unit_id = self.unit_id_generator.get_next_id()
+        return self.combat_engine.add_unit(new_unit_id, unit_name, unit_obj, position)
+
+    def end_turn(self):
+        if self.turn_order_generator.has_next():
+            self.turn_order_generator.next_unit()
+        else :
+            self.turn_order_generator.generate_turn_order()
+        return True
+
+    def use_skill(self, skill_num, target_position):
+        using_unit_id = self.turn_order_generator.get_curr_unit_id()
+        using_combat_unit = self.combat_engine.get_combat_unit(using_unit_id)
+
+        # check if the unit has sufficient resources to use the skill
+        is_skill_used = using_combat_unit.use_skill(skill_num)
+        if not is_skill_used:
+            return False
+
+        self.combat_engine.use_skill(using_unit_id, target_position, skill_num)
+        return True
 
 
 
