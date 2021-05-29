@@ -13,3 +13,4 @@ class Damage(DataStruct):
 
     def get_damage_types(self):
         return iter([key for key in self.dictionary])
+

@@ -2,26 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b31f7d93-a0f1-4030-92ad-a876a6b8c47d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/definitions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_event_log.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/combat_end_event.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/combat_start_event.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/combat/top_level_classes/damage_report.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/combat_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_master.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/combat/combat_engine/turn_order_generator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/add_unit_event.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/add_unit_event.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_event.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/combat_event.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_event_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/combat_event_types.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/end_turn_event.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/end_turn_event.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/move_event.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/move_event.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/use_skill_event.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/use_skill_event.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/skills/enemy_skills/scratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/skills/enemy_skills/scratch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/skills/hero_skills/punch.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/skills/hero_skills/punch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/top_level_classes/buff.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/top_level_classes/buff.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/top_level_classes/combat_unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/top_level_classes/combat_unit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/top_level_classes/damage_types.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/top_level_classes/damage_types.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/combat/top_level_classes/skill.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/top_level_classes/skill.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_engine_states.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_event_log.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/combat_engine/combat_event_log.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/add_unit_event.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/combat_end_event.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/combat_event.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/combat_event_types.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/combat_start_event.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/end_turn_event.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/move_event.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/combat_engine/combat_events/use_skill_event.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/top_level_classes/damage.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/top_level_classes/damage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat/top_level_classes/data_struct.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat/top_level_classes/data_struct.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/combat_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/combat_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,5 +124,14 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="curr_active_combat_unit" />
+        <watch expression="curr_active_combat_unit" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

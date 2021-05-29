@@ -19,3 +19,6 @@ class DataStruct:
 
     def get_dictionary(self):
         return self.dictionary
+
+    def is_empty(self):
+        return len(self.dictionary) == 0
